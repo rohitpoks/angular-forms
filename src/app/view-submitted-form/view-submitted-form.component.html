@@ -1,0 +1,18 @@
+<div *ngIf="submitted">
+
+
+<ul>
+ <li>Name: {{form.name}} </li>
+ <li>Password: {{form.password}} </li>
+ <li>Email: {{form.email}} </li>
+ <li>Address:</li>
+ <ul><li>City: {{form.city}} </li>
+ <li>State: {{form.state}} </li>
+ <li>Zip: {{form.zip}} </li></ul>
+ <li *ngIf="form.subscribe">You have an active email subscription</li>
+ <li *ngIf="!form.subscribe">You are not in the mailing list</li>
+ <li>Dietary Restrictions: {{form.diet}} </li>
+</ul>
+
+<button type="submit" (click)="reset()">Collapse</button>
+</div>

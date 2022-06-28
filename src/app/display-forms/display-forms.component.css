@@ -1,0 +1,24 @@
+div {
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+
+input {
+ margin-left: 5px;
+}
+
+.error__box {
+border-color: red;
+}
+
+.error__message {
+ color: red;
+}
+
+small {
+ margin-left: 10px;
+}
+
+.dont__show {
+ color: transparent;
+}

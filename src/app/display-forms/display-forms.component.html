@@ -1,0 +1,79 @@
+<form [formGroup]="registrationForm"> 
+ <!-- this is how we use the formGroup directive -->
+<div>
+ <label for="name">Name</label>
+ <!-- we attach it to the form control using the formControlName attribute -->
+ <!-- to add an error class, simply put the class inside rectangular brackets and set it equal to a typescript expression inside quotes -->
+ <input type="text" id="name" formControlName="userName" [class.error__box]="userName?.touched &&  userName?.invalid">
+ <div *ngIf="userName?.invalid && userName?.touched">
+<small class="error__message" *ngIf="userName?.errors?.['required']"> Please enter some username! </small>
+<small class="error__message" *ngIf="userName?.errors?.['minlength']">Please enter a username of at least 4 characters! </small>
+ </div>
+</div>
+
+<div>
+ <label for="password">Password</label>
+ <input type="password" id="password" formControlName="password" [class.error__box]="password?.touched && password?.invalid">
+ <div *ngIf="password?.touched && password?.invalid">
+  <small class="error__message" *ngIf="password?.errors?.['required']"> Please enter some password! </small>
+<small class="error__message" *ngIf="password?.errors?.['minlength']">Please enter a password of at least 8 characters! </small>
+ </div>
+</div>
+
+<div>
+ <label for="confirmPassword">Confirm Password</label>
+ <input type="password" id="confirmPassword" formControlName="confirmPassword" [class.error__box]="confirmPassword?.touched && confirmPassword?.invalid">
+  <div *ngIf="confirmPassword?.touched && confirmPassword?.invalid">
+  <small class="error__message" *ngIf="confirmPassword?.errors?.['required']"> Please enter some password! </small>
+<small class="error__message" *ngIf="confirmPassword?.errors?.['minlength']">Please enter a password of at least 8 characters! </small>
+<!-- create cross-field validation here -->
+ </div>
+</div>
+
+ <div>
+ <label for="email">Email</label>
+ <input type="email" id="email" formControlName="email" [class.error__box]="email?.touched && email?.invalid">
+</div>
+
+
+<div formGroupName="address">
+<div>
+ <label for="city">City</label>
+ <input type="text" id="city" formControlName="city" [class.error__box]="city?.touched && city?.invalid">
+ <small [class.dont__show]="!city?.touched || city?.valid" [class.error__message]="city?.touched && city?.invalid">Please enter some city!</small>
+</div>
+
+<div>
+ <label for="state">State</label>
+ <input type="text" id="state" formControlName="state" [class.error__box]="state?.touched && state?.invalid">
+ <small [class.dont__show]="!state?.touched || state?.valid" [class.error__message]="state?.touched && state?.invalid">Please enter some state!</small>
+</div>
+
+<div>
+ <label for="postalCode">Zip Code</label>
+ <input type="text" id="postalCode" formControlName="postalCode" [class.error__box]="postalCode?.touched && postalCode?.invalid">
+ <small [class.dont__show]="!postalCode?.touched || postalCode?.valid" [class.error__message]="postalCode?.touched && postalCode?.invalid">Please enter a number exactly 5 digits long!</small>
+</div>
+
+</div>
+
+<div>
+ <label for="subscribe">Subscribe to emails</label>
+ <input type="checkbox" id="subscribe" formControlName="subscribe">
+ <!-- apply conditional validation here -->
+</div>
+
+<div>
+ <label for="diet">Dietary Restrictions:</label>
+ <select name="diet" id="diet" formControlName="diet">
+  <option value="veg">Vegetarian</option>
+  <option value="vegan">Vegan</option>
+  <option value="nonveg">Non-Vegetarian</option>
+ </select>
+
+</div>
+<button [disabled]="!registrationForm.valid || registrationForm.untouched" type="submit" (click)="next.viewLatestForm(registrationForm.value)">Submit</button>
+<app-view-submitted-form #next></app-view-submitted-form>
+</form>
+
+
