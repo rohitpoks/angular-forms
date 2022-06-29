@@ -24,7 +24,7 @@ export class DisplayFormsComponent implements OnInit {
     }),
     subscribe: [false],
     diet: ['veg'],
-  }, {validator: this.checkPassword});
+  }, {validator: [this.checkPassword, this.checkEmail]});
   // since we need to pass the entire form group for cross field validation, we specify the validator function as a separate json object
 
   get userName() {
@@ -82,6 +82,14 @@ export class DisplayFormsComponent implements OnInit {
  }
 
 
+ checkEmail(control: AbstractControl) {
+  const email = control.get('email');
+  const subscribed = control.get('subscribe');
+  if (!subscribed) return null;
+  // if entered email and subscribed
+  if ((!email || email.value ==='') && subscribed.value) return {"noEmail" : true};
+  return null;
+ }
 
 }
 
