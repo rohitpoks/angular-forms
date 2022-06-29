@@ -90,7 +90,6 @@ export class DisplayFormsComponent implements OnInit {
   if ((!email || email.value ==='') && subscribed.value) return {"noEmail" : true};
   return null;
  }
-
 }
 
 
