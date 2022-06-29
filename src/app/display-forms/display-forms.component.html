@@ -22,11 +22,10 @@
 
 <div>
  <label for="confirmPassword">Confirm Password</label>
- <input type="password" id="confirmPassword" formControlName="confirmPassword" [class.error__box]="confirmPassword?.touched && confirmPassword?.invalid">
-  <div *ngIf="confirmPassword?.touched && confirmPassword?.invalid">
-  <small class="error__message" *ngIf="confirmPassword?.errors?.['required']"> Please enter some password! </small>
-<small class="error__message" *ngIf="confirmPassword?.errors?.['minlength']">Please enter a password of at least 8 characters! </small>
-<!-- create cross-field validation here -->
+ <input type="password" id="confirmPassword" formControlName="confirmPassword" [class.error__box]="confirmPassword?.touched && registrationForm?.errors?.['mismatch']">
+ <!-- if mismatch : error-->
+  <div>
+<small class="error__message" *ngIf="registrationForm?.errors?.['mismatch'] && confirmPassword?.touched">Passwords do not match!</small>
  </div>
 </div>
 

@@ -15,7 +15,7 @@ export class DisplayFormsComponent implements OnInit {
   registrationForm = this.fb.group({
     userName: ['', [Validators.required, Validators.minLength(4)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8), ]],
     email: ['', Validators.email],
     address: this.fb.group({
       city: ['', Validators.required],
@@ -24,7 +24,8 @@ export class DisplayFormsComponent implements OnInit {
     }),
     subscribe: [false],
     diet: ['veg'],
-  });
+  }, {validator: this.checkPassword});
+  // since we need to pass the entire form group for cross field validation, we specify the validator function as a separate json object
 
   get userName() {
     return this.registrationForm.get('userName');
@@ -66,6 +67,18 @@ export class DisplayFormsComponent implements OnInit {
   // if (answer?.length == 5) return null;
   if (answer.length == 5 && !isNaN(Number(answer))) return null;
   return { "Length": answer };
+ }
+
+ checkPassword(control: AbstractControl) {
+  // control parameter doesn't refer to an individual form control, refers to form group, encompassing the different fields
+
+  // here, refers to the registration form form group
+  // because validator functions can only accept one parameter
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+  // if password isn't blank and  the two are equal then return null else return error
+  if (password?.value == confirmPassword?.value) return null;
+  return {"mismatch" : true};
  }
 
 
