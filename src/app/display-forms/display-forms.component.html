@@ -1,3 +1,4 @@
+
 <form [formGroup]="registrationForm"> 
  <!-- this is how we use the formGroup directive -->
 <div>
@@ -34,7 +35,7 @@
  <input type="email" id="email" formControlName="email" [class.error__box]="email?.touched && (email?.invalid || registrationForm?.errors?.['noEmail'])">
  <div *ngIf="email?.touched && (email?.invalid || registrationForm?.errors?.['noEmail'])">
   <small *ngIf="!email?.valid" class="error__message">Please enter a valid email!</small>
-  <small *ngIf="registrationForm?.errors?.['noEmail']">Please enter an email address if you wish to subscribe! </small>
+  <small *ngIf="registrationForm?.errors?.['noEmail']" class="error__message">Please enter an email address if you wish to subscribe! </small>
  </div>
 </div>
 
